@@ -3,9 +3,10 @@ import logging
 import asyncio
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+# from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 # from aiogram.types import Message
 # from aiogram.utils import executor
+from keyboard import keyboard
 import config
 
 API_TOKEN = config.token
@@ -15,20 +16,9 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
-# Создание клавиатуры
-keyboard = ReplyKeyboardMarkup(
-    keyboard=[
-        [KeyboardButton(text='/start')],
-        [KeyboardButton(text='/info')],
-        [KeyboardButton(text='/time')],
-        [KeyboardButton(text='/user')]
-    ],
-    resize_keyboard=True
-)
-
 @dp.message(Command("start"))
 async def command_start(message: types.Message):
-    await message.answer("Привет! Я эхобот aiogram 3. Отправь мне любое сообщение и я повторю его")
+    await message.answer("Привет! Я эхобот aiogram 3. Отправь мне любое сообщение и я повторю его",reply_markup=keyboard)
 
 @dp.message(F.text == 'Время')
 @dp.message(Command("time"))
