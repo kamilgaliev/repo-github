@@ -7,6 +7,7 @@ from aiogram.filters.command import Command
 # from aiogram.types import Message
 # from aiogram.utils import executor
 from keyboard import keyboard
+from random_fox import random_fox
 import config
 
 API_TOKEN = config.token
@@ -45,6 +46,12 @@ async def command_start(message: types.Message):
     user = message.from_user
     full_name = f"{user.first_name} {user.last_name}" if user.last_name else user.first_name
     await message.answer(f"Ваше полное имя: {full_name}")
+
+@dp.message(F.text.lower() == 'лиса')
+@dp.message(Command("fox"))
+async def command_fox(message: types.Message):
+    image_fox = random_fox()
+    await message.answer_photo(photo=image_fox, reply_markup=keyboard)
 
 @dp.message()
 async def echo(message: types.Message):

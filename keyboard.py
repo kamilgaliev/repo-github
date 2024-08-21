@@ -7,7 +7,8 @@ keyboard = ReplyKeyboardMarkup(
         [KeyboardButton(text='/start'),KeyboardButton(text='/info')],
         # [KeyboardButton(text='/info')],
         # [KeyboardButton(text='/time')],
-        [KeyboardButton(text='/time'),KeyboardButton(text='/user')]
+        [KeyboardButton(text='/time'),KeyboardButton(text='/user')],
+        [KeyboardButton(text='/fox')]
     ],
     resize_keyboard=True
 )
