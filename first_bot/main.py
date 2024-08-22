@@ -8,6 +8,7 @@ from aiogram.filters.command import Command
 # from aiogram.utils import executor
 from keyboard import keyboard
 from random_fox import random_fox
+from random import randint, random
 import config
 
 API_TOKEN = config.token
@@ -21,13 +22,13 @@ dp = Dispatcher()
 async def command_start(message: types.Message):
     await message.answer("Привет! Я эхобот aiogram 3. Отправь мне любое сообщение и я повторю его",reply_markup=keyboard)
 
-@dp.message(F.text == 'Время')
+@dp.message(F.text.lower() == 'время')
 @dp.message(Command("time"))
 async def command_start(message: types.Message):
     myTime = str(datetime.datetime.now().strftime("%H:%M:%S"))
     await message.answer("Текущее время:" + myTime)
 
-@dp.message(F.text == 'Информация')
+@dp.message(F.text.lower() == 'информация')
 @dp.message(Command("info"))
 async def command_start(message: types.Message):
     info_text = (
@@ -52,6 +53,12 @@ async def command_start(message: types.Message):
 async def command_fox(message: types.Message):
     image_fox = random_fox()
     await message.answer_photo(photo=image_fox, reply_markup=keyboard)
+
+@dp.message(F.text.lower() == 'число')
+@dp.message(Command("number"))
+async def command_random_int(message: types.Message):
+    number = randint(1,10)
+    await message.answer(f"{number}", reply_markup=keyboard)
 
 @dp.message()
 async def echo(message: types.Message):
